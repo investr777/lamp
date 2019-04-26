@@ -19,11 +19,20 @@ public class RoomWithLampService {
         return roomWithLampFromDB;
     }
 
-    public List<RoomWithLamp> getAll(){
+    public List<RoomWithLamp> getAll() {
         return roomWithLampRepository.findAll();
     }
 
-    public RoomWithLamp change(RoomWithLamp roomWithLamp){
-        return roomWithLampRepository.save(roomWithLamp);
+    public RoomWithLamp change(Long id, RoomWithLamp roomWithLamp) {
+        RoomWithLamp roomWithLampFromDB = roomWithLampRepository.findRoomWithLampById(id);
+        if (roomWithLampFromDB == null) {
+            return null;
+        }
+        if (roomWithLampFromDB.getActiveLamp()) {
+            roomWithLampFromDB.setActiveLamp(false);
+        } else {
+            roomWithLampFromDB.setActiveLamp(true);
+        }
+        return roomWithLampRepository.save(roomWithLampFromDB);
     }
 }

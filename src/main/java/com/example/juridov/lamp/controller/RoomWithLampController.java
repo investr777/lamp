@@ -4,12 +4,12 @@ import com.example.juridov.lamp.entity.RoomWithLamp;
 import com.example.juridov.lamp.service.RoomWithLampService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/room")
 public class RoomWithLampController {
     private final RoomWithLampService roomWithLampService;
 
@@ -19,12 +19,13 @@ public class RoomWithLampController {
 
     @MessageMapping("/changeLight")
     @SendTo("/topic/activity")
-    public RoomWithLamp getRoomWithLamp(RoomWithLamp roomWithLamp) {
-        return roomWithLampService.change(roomWithLamp);
+    @PutMapping("/{id}")
+    public RoomWithLamp getRoomWithLamp(@PathVariable Long id, @RequestBody RoomWithLamp roomWithLamp) {
+        return roomWithLampService.change(id, roomWithLamp);
     }
 
-    @GetMapping(path = "/rooms")
-    public List<RoomWithLamp> getRoomWithLamp() {
+    @GetMapping
+    public List<RoomWithLamp> getRooms() {
         return roomWithLampService.getAll();
     }
 }

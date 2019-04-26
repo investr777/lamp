@@ -15,7 +15,7 @@ public class RoomWithLamp {
     private Long id;
 
     @Column(name = "lamp")
-    private Boolean isActiveLamp;
+    private Boolean activeLamp;
 
     public Long getId() {
         return id;
@@ -25,11 +25,11 @@ public class RoomWithLamp {
         this.id = id;
     }
 
-    public boolean isActiveLamp() {
-        return isActiveLamp;
+    public Boolean getActiveLamp() {
+        return activeLamp;
     }
 
-    public void setActiveLamp(boolean activeLamp) {
-        isActiveLamp = activeLamp;
+    public void setActiveLamp(Boolean activeLamp) {
+        this.activeLamp = activeLamp;
     }
 }
