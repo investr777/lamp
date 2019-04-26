@@ -4,7 +4,7 @@ Vue.component('room-row', {
     props: ['room'],
     data: function() {
         return {
-            id: ''
+            id: '',
         }
     },
     template:
@@ -28,20 +28,21 @@ Vue.component('room-row', {
 });
 
 Vue.component('rooms-list', {
-    props: ['rooms'],
-    template:
-        '<div><room-row v-for="room in rooms" :key="room.id" :room="room" /></div>'
-});
-
-var app = new Vue({
-    el: '#app',
-    template: '<rooms-list :rooms="rooms"/>',
-    data: {
-        rooms: []
+    data: function() {
+        return {
+            rooms: [],
+        }
     },
     created: function () {
         RoomsApi.get().then(result =>
             result.json().then(data =>
                 data.forEach(room => this.rooms.push(room))))
-    }
+    },
+    template:
+        '<div><room-row v-for="room in rooms" :key="room.id" :room="room" /></div>'
+});
+
+new Vue({
+    el: '#app',
+    template: '<rooms-list/>'
 });

@@ -37,7 +37,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 
         //Fourth room
         RoomWithLamp fourthRoom = new RoomWithLamp();
-        fourthRoom.setActiveLamp(true);
+        fourthRoom.setActiveLamp(false);
         roomWithLampRepository.save(fourthRoom);
 
         //Fifth room

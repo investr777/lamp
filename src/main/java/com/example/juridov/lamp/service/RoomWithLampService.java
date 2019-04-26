@@ -23,7 +23,7 @@ public class RoomWithLampService {
         return roomWithLampRepository.findAll();
     }
 
-    public RoomWithLamp change(Long id, RoomWithLamp roomWithLamp) {
+    public RoomWithLamp change(Long id) {
         RoomWithLamp roomWithLampFromDB = roomWithLampRepository.findRoomWithLampById(id);
         if (roomWithLampFromDB == null) {
             return null;

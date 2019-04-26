@@ -17,15 +17,19 @@ public class RoomWithLampController {
         this.roomWithLampService = roomWithLampService;
     }
 
-    @MessageMapping("/changeLight")
-    @SendTo("/topic/activity")
     @PutMapping("/{id}")
-    public RoomWithLamp getRoomWithLamp(@PathVariable Long id, @RequestBody RoomWithLamp roomWithLamp) {
-        return roomWithLampService.change(id, roomWithLamp);
+    public RoomWithLamp getRoomWithLamp(@PathVariable Long id) {
+        return roomWithLampService.change(id);
     }
 
     @GetMapping
     public List<RoomWithLamp> getRooms() {
         return roomWithLampService.getAll();
+    }
+
+    @MessageMapping("/changeLight")
+    @SendTo("/topic/activity")
+    public RoomWithLamp change(RoomWithLamp roomWithLamp){
+        return roomWithLampService.change(roomWithLamp.getId());
     }
 }
