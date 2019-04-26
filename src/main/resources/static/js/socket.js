@@ -1,23 +1,29 @@
 var stompClient = null
 
-export function connect() {
+const handlers = []
+
+function connect() {
     const socket = new SockJS('/gs-guide-websocket')
     stompClient = Stomp.over(socket)
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame)
         stompClient.subscribe('/topic/activity', room => {
-            // showGreeting(JSON.parse(greeting.body).content)
+            handlers.forEach(handler => handler(JSON.parse(room.body)))
         })
     })
 }
 
-export function disconnect() {
+function addHandler(handler) {
+    handlers.push(handler);
+}
+
+function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect()
     }
     console.log("Disconnected")
 }
 
-export function sendRoom(room) {
+function sendRoom(room) {
     stompClient.send("/app/changeLight", {}, JSON.stringify(room))
 }
