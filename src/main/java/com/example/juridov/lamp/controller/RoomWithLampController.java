@@ -17,11 +17,6 @@ public class RoomWithLampController {
         this.roomWithLampService = roomWithLampService;
     }
 
-    @PutMapping("/{id}")
-    public RoomWithLamp getRoomWithLamp(@PathVariable Long id) {
-        return roomWithLampService.change(id);
-    }
-
     @GetMapping
     public List<RoomWithLamp> getRooms() {
         return roomWithLampService.getAll();
