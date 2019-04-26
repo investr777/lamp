@@ -15,7 +15,7 @@ public class RoomWithLamp {
     private Long id;
 
     @Column(name = "lamp")
-    private boolean isActiveLamp;
+    private Boolean isActiveLamp;
 
     public Long getId() {
         return id;

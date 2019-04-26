@@ -22,4 +22,8 @@ public class RoomWithLampService {
     public List<RoomWithLamp> getAll(){
         return roomWithLampRepository.findAll();
     }
+
+    public RoomWithLamp change(RoomWithLamp roomWithLamp){
+        return roomWithLampRepository.save(roomWithLamp);
+    }
 }
