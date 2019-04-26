@@ -6,25 +6,35 @@ Vue.component('room-row', {
     props: ['room'],
     data: function() {
         return {
-            id: '',
+            id: ''
         }
     },
     template:
         '<div>' +
         '<div v-if="id === room.id">' +
-        'Комнта №{{room.id}}:' +
-        'Лампочка {{room.activeLamp}}' +
-        '<input type="button" value="On/Off" @click="edit"/>' +
+            'Комнта №{{room.id}}:' +
+            '<span v-if="room.activeLamp">' +
+                '<img src="/img/on.jpg" @click="edit"/>' +
+                '<input v-if="room.activeLamp" type="button" value="Turn off" @click="edit"/>' +
+            '</span>' +
+            '<span v-else>' +
+                '<img src="/img/off.jpg" @click="edit"/>' +
+                '<input v-if="!room.activeLamp" type="button" value="Turn on" @click="edit"/>' +
+            '</span>' +
+            '<input type="button" value="Выйти из комнаты" @click="exit"/>' +
         '</div>' +
         '<div v-else>' +
-        'Комнта №{{room.id}}:' +
-        '<input type="button" value="Войти в комнату" @click="id = room.id"/>' +
+            'Комнта №{{room.id}}:' +
+            '<input type="button" value="Войти в комнату" @click="id = room.id"/>' +
         '</div>' +
         '</div>',
     methods: {
         edit: function () {
             var room = {activeLamp: true}
             sendRoom({id: this.id}, room)
+        },
+        exit: function () {
+            this.id = ''
         }
     }
 });
