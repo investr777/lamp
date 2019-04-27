@@ -10,7 +10,9 @@
 </head>
 <body>
 <div>
-    <div id='app'></div>
+    <div id='app'>
+        <rooms-list v-bind="rooms"></rooms-list>
+    </div>
 </div>
 <script src="/js/socket.js"></script>
 <script src="/js/main.js"></script>
